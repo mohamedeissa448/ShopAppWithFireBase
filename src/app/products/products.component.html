@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-3">
+    <div class="list-group">
+      <a
+        class="list-group-item list-group-item-action"
+        [routerLink]="['/']"
+        [queryParams]="{ category: category.key }"
+        *ngFor="let category of filteredCtegories"
+      >
+        {{ category.payload.val().name }}
+      </a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="row">
+      <ng-container *ngFor="let product of products; index as i">
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <img
+              [src]="product.payload.val().imageUrl"
+              class="card-img-top"
+              [alt]="product.payload.val().title"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.payload.val().title }}</h5>
+              <p class="card-text">{{ product.payload.val().price }}</p>
+              <a href="#" class="btn btn-primary">Add To Cart</a>
+            </div>
+          </div>
+        </div>
+        <div class="w-100" *ngIf="(i + 1) % 2 === 0"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
