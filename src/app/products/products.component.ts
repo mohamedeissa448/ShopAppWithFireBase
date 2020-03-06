@@ -1,7 +1,5 @@
-import { CategoryService } from "./../category.service";
 import { ProductService } from "./../product.service";
-import { Component, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -10,27 +8,22 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./products.component.css"]
 })
 export class ProductsComponent {
-  products: any[];
-  filteredCtegories: any[];
-  categories: any[];
-  constructor(
-    productServ: ProductService,
-    categoryServ: CategoryService,
-    activeRoute: ActivatedRoute
-  ) {
+  products: any[] = [];
+  filteredProducts: any[] = [];
+  currentCategory: string;
+  constructor(productServ: ProductService, activeRoute: ActivatedRoute) {
     productServ.getAll().subscribe(actions => {
       this.products = actions;
-      this.filteredCtegories = actions;
-    });
-    categoryServ.getAll().subscribe(actions => {
-      this.categories = actions;
-      console.log(" this.categories", this.categories);
-    });
-    activeRoute.queryParams.subscribe(params => {
-      console.log("queryParams", params);
-      this.filteredCtegories = this.products.filter(
-        product => product.payload.val().category === params.category
-      );
+      this.filteredProducts = actions;
+
+      activeRoute.queryParams.subscribe(params => {
+        this.currentCategory = params.category;
+        this.filteredProducts = this.currentCategory
+          ? this.products.filter(
+              product => product.payload.val().category === params.category
+            )
+          : this.products;
+      });
     });
   }
 }
