@@ -8,9 +8,13 @@
     <h5 class="card-title">{{ product.payload.val().title }}</h5>
     <p class="card-text">{{ product.payload.val().price | currency }}</p>
     <div class="card-footer text-muted">
-      <a href="#" class="btn btn-primary btn-block btn-lg" *ngIf="showActions"
-        >Add To Cart</a
+      <button
+        class="btn btn-primary btn-block btn-lg"
+        *ngIf="showActions"
+        (click)="addToCart(product)"
       >
+        Add To Cart
+      </button>
     </div>
   </div>
 </div>
