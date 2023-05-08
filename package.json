@@ -24,7 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "bootstrap": "^4.4.1",
     "firebase": "^7.9.2",
-    "firebase-tools": "^7.14.0",
+    "firebase-tools": "^11.30.0",
     "g": "^2.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
